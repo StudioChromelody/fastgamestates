@@ -1,0 +1,127 @@
+[gd_scene load_steps=8 format=3 uid="uid://dui5fmyo4jsqx"]
+
+[ext_resource type="Script" path="res://addons/fast_gamestates/docks/fast_game_states_menus.gd" id="1_cmpde"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eetmg"]
+bg_color = Color(0, 0.745098, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0uggc"]
+bg_color = Color(0, 0.470588, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_24yii"]
+bg_color = Color(0, 0.596078, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1qcck"]
+bg_color = Color(0.745098, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cw8xc"]
+bg_color = Color(0.470588, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_15wi1"]
+bg_color = Color(0.596078, 0, 0, 1)
+
+[node name="GameStates Menus" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cmpde")
+
+[node name="MenusOverview" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Btn_new" type="Button" parent="MenusOverview"]
+layout_mode = 2
+theme_override_styles/hover = SubResource("StyleBoxFlat_eetmg")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0uggc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_24yii")
+text = "Create new menu"
+
+[node name="MenusSettings" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Settings_MenuName" type="HBoxContainer" parent="MenusSettings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MenusSettings/Settings_MenuName"]
+layout_mode = 2
+text = "Menu Name"
+
+[node name="TextEdit" type="TextEdit" parent="MenusSettings/Settings_MenuName"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "unnamed"
+scroll_fit_content_height = true
+
+[node name="Settings_MenuPath" type="HBoxContainer" parent="MenusSettings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MenusSettings/Settings_MenuPath"]
+layout_mode = 2
+text = "Menu Scene Path"
+
+[node name="TextEdit" type="TextEdit" parent="MenusSettings/Settings_MenuPath"]
+layout_mode = 2
+size_flags_horizontal = 3
+scroll_fit_content_height = true
+
+[node name="Settings_MenuPausable" type="HBoxContainer" parent="MenusSettings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MenusSettings/Settings_MenuPausable"]
+layout_mode = 2
+text = "Process Mode"
+
+[node name="OptionButton" type="OptionButton" parent="MenusSettings/Settings_MenuPausable"]
+layout_mode = 2
+selected = 2
+item_count = 3
+popup/item_0/text = "Pausable"
+popup/item_1/text = "When Paused"
+popup/item_1/id = 1
+popup/item_2/text = "Always"
+popup/item_2/id = 2
+
+[node name="Label2" type="Label" parent="MenusSettings/Settings_MenuPausable"]
+layout_mode = 2
+text = "Pauses Game"
+
+[node name="CheckBox" type="CheckBox" parent="MenusSettings/Settings_MenuPausable"]
+layout_mode = 2
+
+[node name="Btn_delete" type="Button" parent="MenusSettings"]
+layout_mode = 2
+theme_override_constants/align_to_largest_stylebox = 1
+theme_override_styles/hover = SubResource("StyleBoxFlat_1qcck")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cw8xc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_15wi1")
+text = "Delete Menu"
+
+[node name="HSeparator" type="HSeparator" parent="MenusSettings"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="Btn_back_to_overview" type="Button" parent="MenusSettings"]
+layout_mode = 2
+text = "Back to overview"
+
+[connection signal="pressed" from="MenusOverview/Btn_new" to="." method="_on_create_new_menu"]
+[connection signal="text_changed" from="MenusSettings/Settings_MenuName/TextEdit" to="." method="_on_menuname_changed"]
+[connection signal="text_changed" from="MenusSettings/Settings_MenuPath/TextEdit" to="." method="_on_menu_scenepath_changed"]
+[connection signal="item_selected" from="MenusSettings/Settings_MenuPausable/OptionButton" to="." method="_on_menu_mode_item_selected"]
+[connection signal="toggled" from="MenusSettings/Settings_MenuPausable/CheckBox" to="." method="_on_menu_pausable_checkbox_toggled"]
+[connection signal="pressed" from="MenusSettings/Btn_delete" to="." method="_on_btn_delete_pressed"]
+[connection signal="pressed" from="MenusSettings/Btn_back_to_overview" to="." method="_on_back_to_overview"]
