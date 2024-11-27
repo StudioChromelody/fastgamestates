@@ -1,3 +1,5 @@
+[<img width="250px" src="addons/fast_gamestates/fgs_logo.png" alt="FastGameStates Logo" />]()
+
 # fastgamestates
 With FastGameStates you can easily create menus, settings and gamestates within seconds! Use it for game jams or bigger projects. With this tool you don't have the struggle with loading and unloading menus anymore.
 
